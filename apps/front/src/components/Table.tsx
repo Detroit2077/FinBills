@@ -7,6 +7,7 @@ interface tableType{
     category: "Ledger" | "Customer" |"Transactions";
 }
 const Table = ({category}:tableType) => {
+    console.log("table file..")
     return <div>
         <div className="p-3">
         {(category ==="Ledger") && <TableHeader date={"Date"} description ={"Product"} category = {"Category"} dueAmount ={"Due Amount"}  totalAmount = {"Total Amount"} customer={"Costumer"}/>}
