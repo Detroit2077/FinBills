@@ -6,7 +6,7 @@ dotenv.config();
 const prisma = new PrismaClient()
 const port = process.env.PORT || 8080;
 
-
+import apiRouter from './apiRoutes';
 
 
 app.listen(port , ()=>{
@@ -14,19 +14,7 @@ app.listen(port , ()=>{
  
 })
 
-
-async function test() {
-  try {
-    const customers = await prisma.customer.findMany()
-    console.log(customers)
-  } catch (error) {
-    console.error("Error connecting to the database:", error)
-  } finally {
-    await prisma.$disconnect()
-  }
-}
-
-test()
+app.use("/api", apiRouter);
 
 
 app.get("/",(req,res)=>{

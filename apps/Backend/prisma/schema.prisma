@@ -5,7 +5,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql" // Adjust according to your database
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -51,18 +51,32 @@ model Customer {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  businessId  Int
-  name        String
-  description String
-  price       Float
-  stock       Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                   Int       @id @default(autoincrement())
+  businessId           Int
+  itemName             String
+  purchasePrice        Float
+  purchasePriceWithGst Boolean
+  sellingPrice         Float
+  sellingPriceWithGst  Boolean
+  hsnCode              String
+  MRP                  Float
+  IteamCode            String
+  PieceUnit            String
+  Quantity             Int
+  lowStockQuantity     Int
+  GSTRate              Float
+  iteamImage           String?
+  iteamDescription     String?
+  openingStock         Int
+  openingStockDate     DateTime
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 
-  business Business @relation(fields: [businessId], references: [id])
-  ledgerItems LedgerItem[]
+  business             Business  @relation(fields: [businessId], references: [id])
+  ledgerItems          LedgerItem[]
 }
+
+
 
 model Business {
   id        Int        @id @default(autoincrement())
