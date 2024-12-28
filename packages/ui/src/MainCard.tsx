@@ -1,16 +1,15 @@
-import Table from "./Table";
-import SearchBar from "./SearchBar";
-import DateButton from "./FilterButtons";
-import {FilterButton} from "./FilterButtons";
-import Card from "./Card";
+import Table from "./Table.js";
+import SearchBar from "./SearchBar.js";
+import DateButton from "./FilterButtons.js";
+import { FilterButton } from "./FilterButtons.js";
+import Card from "./Card.js";
 import { LuPlus } from "react-icons/lu";
-
 
 interface cardOptions {
   title: string;
   col: string;
   amount: number;
-  currency?:boolean;
+  currency?: boolean;
 }
 const MainCard = ({ title }: Data) => {
   const cardData: cardOptions[] = [
@@ -18,7 +17,32 @@ const MainCard = ({ title }: Data) => {
     { title: "Total Debits", col: "text-red-500", amount: 1000 },
     { title: "Total Balance", col: "text-black-500", amount: 90000 },
   ];
-  const DashboardData:cardOptions[] =[ { title: "Total Sales", col: "text-black-500", amount: 10000 , currency:true} ,  { title: "Active Costumers", col: "text-black-500", amount: 24 ,currency:false} , { title: "Inventory Items", col: "text-black-500", amount: 30,currency:false } , { title: "Monthly Revenue", col: "text-black-500", amount: 10000,currency:true}]
+  const DashboardData: cardOptions[] = [
+    {
+      title: "Total Sales",
+      col: "text-black-500",
+      amount: 10000,
+      currency: true,
+    },
+    {
+      title: "Active Costumers",
+      col: "text-black-500",
+      amount: 24,
+      currency: false,
+    },
+    {
+      title: "Inventory Items",
+      col: "text-black-500",
+      amount: 30,
+      currency: false,
+    },
+    {
+      title: "Monthly Revenue",
+      col: "text-black-500",
+      amount: 10000,
+      currency: true,
+    },
+  ];
   return (
     <div className="bg-slate-200 w-full rounded-md border border-t-slate-300 shadow-md flex flex-col">
       <div className="h-16 bg-slate-100 rounded-md flex justify-between items-center ">
@@ -27,16 +51,18 @@ const MainCard = ({ title }: Data) => {
           {title}
         </div>
 
-        { title === "Ledger" && <div  className="flex gap-6 mr-10">
-          <DateButton/>
-          <FilterButton/>
-        </div>
-        }
+        {title === "Ledger" && (
+          <div className="flex gap-6 mr-10">
+            <DateButton />
+            <FilterButton />
+          </div>
+        )}
 
-        {
-          title === "Customer" && <div className="mr-10"><AddCustomerButton/></div>
-        }
-
+        {title === "Customer" && (
+          <div className="mr-10">
+            <AddCustomerButton />
+          </div>
+        )}
       </div>
       {title === "Ledger" && (
         <div className="flex h-24 bg-slate-100 ">
@@ -52,7 +78,12 @@ const MainCard = ({ title }: Data) => {
         <div className="flex h-24 bg-slate-100 ">
           {DashboardData.map((data) => (
             <div key={data.title} className="flex flex-grow m-3">
-              <Card title={data.title} col={data.col} amount={data.amount}  currency  = {data.currency} />
+              <Card
+                title={data.title}
+                col={data.col}
+                amount={data.amount}
+                currency={data.currency}
+              />
             </div>
           ))}
         </div>
@@ -72,10 +103,13 @@ interface Data {
   title: "Ledger" | "Customer" | "Transactions" | "Dashboard";
 }
 
-
-function AddCustomerButton(){
-  return <div>
-   
-    <button className="bg-blue-600 flex items-center gap-3 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded ">  <LuPlus size={30} /> Add costumer</button>
-  </div>
+function AddCustomerButton() {
+  return (
+    <div>
+      <button className="bg-blue-600 flex items-center gap-3 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded ">
+        {" "}
+        <LuPlus size={30} /> Add costumer
+      </button>
+    </div>
+  );
 }

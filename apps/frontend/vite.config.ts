@@ -9,5 +9,5 @@ export default defineConfig({
       ui: path.resolve(__dirname, "../ui/src"),
     },
   },
-})
+});
 
