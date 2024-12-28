@@ -1,7 +1,5 @@
-// import { Appbar } from "ui";
-import Appbar from "../components/Appbar";
-import Sidebar from "../components/Sidebar";
-import MainCard from "../components/MainCard";
+import {Appbar, Sidebar, MainCard} from "@repo/ui/index";
+
 const Dashboard = () => {
     return <div>
         <Appbar></Appbar>

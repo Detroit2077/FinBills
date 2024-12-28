@@ -17,7 +17,10 @@ const Appbar = () => {
     >
       <div className="flex items-center justify-center font-bold text-xl ml-10 ">
         <Link to="#">
-        <h1 className="select-none"><span className="text-red-600 mr-[0.4px] text-2xl">F</span>inbills.</h1></Link>
+          <h1 className="select-none">
+            <span className="text-red-600 mr-[0.4px] text-2xl">F</span>inbills.
+          </h1>
+        </Link>
       </div>
       <div className="flex gap-5 mr-10 items-center">
         {!notification ? (
@@ -37,7 +40,7 @@ const Appbar = () => {
         ) : (
           <IoSettings onClick={() => setSettings(!settings)} />
         )}
-        <Avatar alt="Tanishq" src="/static/images/avatar/1.jpg" />
+        {/* <Avatar alt="Tanishq" src="/static/images/avatar/1.jpg" /> */}
       </div>
     </div>
   );

@@ -19,9 +19,7 @@ const SearchBar = () => {
         Search
       </label>
       <div className="relative w-full">
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          
-        </div>
+        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
         <input
           type="text"
           id="voice-search"
@@ -31,7 +29,10 @@ const SearchBar = () => {
           value={searchQuery}
           onChange={handleInputChange}
         />
-        <button type="submit" className="absolute inset-y-0 right-0 flex items-center pr-3">
+        <button
+          type="submit"
+          className="absolute inset-y-0 right-0 flex items-center pr-3"
+        >
           <svg
             className="w-4 h-4 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             aria-hidden="true"
