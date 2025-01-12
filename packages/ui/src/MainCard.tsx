@@ -4,6 +4,7 @@ import DateButton from "./FilterButtons.js";
 import { FilterButton } from "./FilterButtons.js";
 import Card from "./Card.js";
 import { LuPlus } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
 interface cardOptions {
   title: string;
@@ -60,9 +61,19 @@ const MainCard = ({ title }: Data) => {
 
         {title === "Customer" && (
           <div className="mr-10">
+            <Link to="/addCustomer">
             <AddCustomerButton />
+            </Link>
           </div>
         )}
+
+        {
+          title === "Inventory"&&(
+            <div  className="mr-10">
+               <AddProductsButton/>
+            </div>
+          )
+        }
       </div>
       {title === "Ledger" && (
         <div className="flex h-24 bg-slate-100 ">
@@ -100,16 +111,30 @@ const MainCard = ({ title }: Data) => {
 export default MainCard;
 
 interface Data {
-  title: "Ledger" | "Customer" | "Transactions" | "Dashboard";
+  title: "Ledger" | "Customer" | "Transactions" | "Dashboard" | "Inventory";
 }
+
 
 function AddCustomerButton() {
   return (
     <div>
       <button className="bg-blue-600 flex items-center gap-3 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded ">
         {" "}
-        <LuPlus size={30} /> Add costumer
+        <LuPlus size={30} />
+        Add costumer
       </button>
     </div>
+  );
+}
+
+function AddProductsButton() {
+  return (
+    <Link to="/addProduct">
+      <button className="bg-blue-600 flex items-center gap-2  text-white   px-3 rounded ">
+        {" "}
+        <LuPlus size={20} />
+        Add Inventory
+      </button>
+    </Link>
   );
 }

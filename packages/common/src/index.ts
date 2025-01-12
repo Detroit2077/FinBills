@@ -1,10 +1,10 @@
 export interface TestimonialType {
-  id: number;
-  name: string;
-  role: string;
+  id:      number;
+  name:    string;
+  role:    string;
   company: string;
   content: string;
-  image: string;
+  image:   string;
 }
 
 export interface FeatureType {

@@ -4,6 +4,10 @@ import Home from "./pages/Home";
 import Customer from "./pages/Customer";
 import Ledgers from "./pages/Ledger";
 import Dashboard from "./pages/Dashboard";
+import Inventory from "./pages/Inventory";
+import AddCustomer2 from "./pages/AddCustomer2";
+import InvoicePage from "./pages/InvoicePage";
+import BarcodePage from "./pages/BarcodePage";
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +16,10 @@ function App() {
         <Route path="/customers" element={<Customer />} />
         <Route path="/ledgers" element={<Ledgers />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/inventory" element={<Inventory />} />
+        <Route path="/addCustomer" element={<AddCustomer2/>} />
+        <Route path="/barcode" element={<BarcodePage/>} />
+
       </Routes>
     </BrowserRouter>
   );
