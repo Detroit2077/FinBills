@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import JsBarcode from "jsbarcode";
 import { jsPDF } from "jspdf";
-import { Appbar, Sidebar, MainCard } from "@repo/ui/index";
+import { Appbar, Sidebar } from "@repo/ui/index";
 
-// Define types for state
 interface Barcode {
   itemName: string;
   barcode: string;
@@ -16,8 +15,6 @@ const BarcodePage: React.FC = () => {
   const [barcodeHeight, setBarcodeHeight] = useState<number>(30);
   const [printerType, setPrinterType] = useState<string>("A4");
   const [barcodes, setBarcodes] = useState<Barcode[]>([]);
-  const [visibleBarcodes, setVisibleBarcodes] = useState<Barcode[]>([]); // State to control the visible barcodes
-  const [barcodeLimit] = useState<number>(10); // Limit the number of visible barcodes
 
   const generateRandomBarcode = () => {
     if (!itemName || !numLabels) {
@@ -30,19 +27,12 @@ const BarcodePage: React.FC = () => {
       const uniqueBarcode = `${itemName}-${Math.random()
         .toString(36)
         .substring(2, 10)}`;
-      newBarcodes.push({
-        itemName,
-        barcode: uniqueBarcode,
-      });
+      newBarcodes.push({ itemName, barcode: uniqueBarcode });
     }
 
-    setBarcodes((prevBarcodes) => [...prevBarcodes, ...newBarcodes]);
+    setBarcodes((prev) => [...prev, ...newBarcodes]);
     setItemName("");
     setNumLabels("");
-    setVisibleBarcodes((prev) => [
-      ...prev,
-      ...newBarcodes.slice(0, barcodeLimit),
-    ]); // Display only a limited number of new barcodes
   };
 
   const handleDownloadPDF = () => {
@@ -70,7 +60,7 @@ const BarcodePage: React.FC = () => {
     let xOffset = margin;
     let yOffset = margin;
 
-    barcodes.forEach((item, index) => {
+    barcodes.forEach((item) => {
       const { itemName, barcode } = item;
 
       const canvas = document.createElement("canvas");
@@ -112,151 +102,101 @@ const BarcodePage: React.FC = () => {
     doc.save("barcodes.pdf");
   };
 
-  const loadMoreBarcodes = () => {
-    const additionalBarcodes = barcodes.slice(visibleBarcodes.length, visibleBarcodes.length + barcodeLimit);
-    setVisibleBarcodes((prev) => [...prev, ...additionalBarcodes]);
-  };
-
   return (
-    <div>
-      <Appbar></Appbar>
-
-      <div className="flex w-full">
-      <Sidebar></Sidebar>
-        <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-          <h1 style={{ color: "#000", fontWeight: "bold" }}>Generate barcodes</h1>
-          <p style={{ fontStyle: "italic", color: "#555" }}>
-            Generate clean and professional barcodes ready for printing.
+    <div className="max-h-screen overflow-hidden">
+      <Appbar />
+      <div className="h-screen flex">
+        <Sidebar />
+        {/* Main Content */}
+        <div className="w-full m-4">
+          <h1 className="text-3xl font-bold text-gray-800">
+            Generate Barcodes
+          </h1>
+          <p className="text-gray-600 mb-6">
+            Create clean and professional barcodes ready for printing.
           </p>
 
-          <div
-            style={{
-              marginBottom: "20px",
-              padding: "10px",
-              border: "1px solid #ddd",
-              borderRadius: "8px",
-            }}
-          >
-            <label>
-              <strong>Item Name:</strong>
-              <input
-                type="text"
-                value={itemName}
-                onChange={(e) => setItemName(e.target.value)}
-                placeholder="Enter item name"
-                style={{ marginLeft: "10px", padding: "5px" }}
-              />
-            </label>
-            <label style={{ marginLeft: "20px" }}>
-              <strong>No. of Labels:</strong>
-              <input
-                type="number"
-                value={numLabels}
-                onChange={(e) => setNumLabels(e.target.value)}
-                placeholder="Enter number of labels"
-                style={{ marginLeft: "10px", padding: "5px" }}
-              />
-            </label>
-            <label style={{ marginLeft: "20px" }}>
-              <strong>Barcode Width (mm):</strong>
-              <input
-                type="number"
-                value={barcodeWidth}
-                onChange={(e) => setBarcodeWidth(Number(e.target.value))}
-                placeholder="Width"
-                style={{ marginLeft: "10px", padding: "5px" }}
-              />
-            </label>
-            <label style={{ marginLeft: "20px" }}>
-              <strong>Barcode Height (mm):</strong>
-              <input
-                type="number"
-                value={barcodeHeight}
-                onChange={(e) => setBarcodeHeight(Number(e.target.value))}
-                placeholder="Height"
-                style={{ marginLeft: "10px", padding: "5px" }}
-              />
-            </label>
-            <label style={{ marginLeft: "20px" }}>
-              <strong>Printer Type:</strong>
-              <select
-                value={printerType}
-                onChange={(e) => setPrinterType(e.target.value)}
-                style={{ marginLeft: "10px", padding: "5px" }}
+          {/* Form Section */}
+          <div className="bg-white border shadow-md rounded-lg p-6 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div>
+                <label className="block font-medium text-gray-700">
+                  Item Name
+                </label>
+                <input
+                  type="text"
+                  value={itemName}
+                  onChange={(e) => setItemName(e.target.value)}
+                  className="mt-1 border border-gray-400 w-full rounded-md shadow-sm p-2"
+                  placeholder="Enter item name"
+                />
+              </div>
+              <div>
+                <label className="block font-medium text-gray-700">
+                  No. of Labels
+                </label>
+                <input
+                  type="number"
+                  value={numLabels}
+                  onChange={(e) => setNumLabels(e.target.value)}
+                  className="mt-1 border border-gray-400 w-full rounded-md shadow-sm p-2"
+                  placeholder="Enter number of labels"
+                />
+              </div>
+
+              <div>
+                <label className="block font-medium text-gray-700">
+                  Printer Type
+                </label>
+                <select
+                  value={printerType}
+                  onChange={(e) => setPrinterType(e.target.value)}
+                  className="mt-1 border border-gray-400 w-full rounded-md shadow-sm p-2"
+                >
+                  <option value="A4">A4 Printer</option>
+                  <option value="SingleCell">Single-Cell Printer</option>
+                </select>
+              </div>
+            </div>
+            <div className="w-full flex justify-evenly">
+              <button
+                onClick={generateRandomBarcode}
+                className="mt-4 bg-blue-600 text-white py-2 px-4 rounded-md shadow hover:bg-blue-700"
               >
-                <option value="A4">A4 Printer</option>
-                <option value="SingleCell">Single-Cell Printer</option>
-              </select>
-            </label>
-            <button
-              onClick={generateRandomBarcode}
-              style={{
-                marginLeft: "20px",
-                backgroundColor: "#000",
-                color: "#fff",
-                padding: "10px 20px",
-                border: "none",
-                borderRadius: "5px",
-              }}
-            >
-              Generate Barcodes
-            </button>
+                Generate Barcodes
+              </button>
+              <button
+                onClick={handleDownloadPDF}
+                className="mt-4 bg-green-600 text-white py-2 px-4 rounded-md shadow hover:bg-green-700"
+              >
+                Download PDF
+              </button>
+            </div>
           </div>
 
-          <div style={{ marginBottom: "20px" }}>
-            <button
-              onClick={handleDownloadPDF}
-              style={{
-                backgroundColor: "#000",
-                color: "#fff",
-                padding: "10px 20px",
-                border: "none",
-                borderRadius: "5px",
-              }}
-            >
-              Download PDF
-            </button>
-          </div>
-
-          <table
-            border={1}
-            style={{
-              width: "100%",
-              marginBottom: "20px",
-              borderCollapse: "collapse",
-              textAlign: "left",
-            }}
+          {/* Barcode Table */}
+          <div
+            id="barcode-container"
+            className="overflow-y-auto max-h-[400px] border rounded-lg p-4"
           >
-            <thead>
-              <tr style={{ backgroundColor: "#f5f5f5", color: "#000" }}>
-                <th style={{ padding: "10px" }}>Item Name</th>
-                <th style={{ padding: "10px" }}>Barcode</th>
-              </tr>
-            </thead>
-            <tbody>
-              {visibleBarcodes.map((item, index) => (
-                <tr key={index}>
-                  <td style={{ padding: "10px" }}>{item.itemName}</td>
-                  <td style={{ padding: "10px" }}>{item.barcode}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          {visibleBarcodes.length < barcodes.length && (
-            <button
-              onClick={loadMoreBarcodes}
-              style={{
-                backgroundColor: "#000",
-                color: "#fff",
-                padding: "10px 20px",
-                border: "none",
-                borderRadius: "5px",
-              }}
-            >
-              Load More
-            </button>
-          )}
+            <div className="grid grid-cols-2 bg-blue-800 text-white font-semibold rounded-t-lg">
+              <div className="px-4 py-2">Item Name</div>
+              <div className="px-4 py-2">Barcode</div>
+            </div>
+            {barcodes.map((item, index) => (
+              <div
+                key={index}
+                className="grid grid-cols-2 hover:bg-gray-100 border-b border-slate-300"
+              >
+                <div className="px-4 py-2 border-r border-slate-300">
+                  {item.itemName}
+                </div>
+                <div className="px-4 py-2 border-r border-slate-300">
+                  {item.barcode}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

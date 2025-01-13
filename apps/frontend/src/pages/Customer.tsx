@@ -1,11 +1,11 @@
 import {Appbar, Sidebar, MainCard} from "@repo/ui/index";
 
 const Dashboard = () => {
-    return <div>
+    return <div className="max-h-screen overflow-hidden">
         <Appbar></Appbar>
         <div className="flex">
-        <Sidebar></Sidebar>
-        <MainCard title={"Customer"}></MainCard>
+        <Sidebar />
+        <MainCard title={"Customer"} /> 
         </div>
     </div>;
 }

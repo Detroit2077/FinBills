@@ -42,4 +42,13 @@ export function CustomerTableHeader({}: any) {
   );
 }
 
+export function BarCodeTableHeader(){
+  return (
+    <div className="grid grid-cols-6 bg-blue-800 text-white font-semibold rounded-t-lg">
+      <div className="px-4 py-2">Item Name</div>
+      <div className="px-4 py-2">Barcode</div>
+    </div>
+  );
+}
+
 export default TableHeader;
