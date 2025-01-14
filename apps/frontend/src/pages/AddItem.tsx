@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AddCustomer = () => {
+const AddItem = () => {
   const [productDetails, setProductDetails] = useState({
     itemName: "",
     description: "",
@@ -272,4 +272,4 @@ const AddCustomer = () => {
   );
 };
 
-export default AddCustomer;
+export default AddItem;

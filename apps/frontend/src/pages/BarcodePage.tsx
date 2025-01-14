@@ -112,151 +112,108 @@ const BarcodePage: React.FC = () => {
     doc.save("barcodes.pdf");
   };
 
-  const loadMoreBarcodes = () => {
-    const additionalBarcodes = barcodes.slice(visibleBarcodes.length, visibleBarcodes.length + barcodeLimit);
-    setVisibleBarcodes((prev) => [...prev, ...additionalBarcodes]);
-  };
-
   return (
-    <div>
-      <Appbar></Appbar>
+    <div className="h-screen flex flex-col">
+      <Appbar />
+      <div className="flex h-full overflow-hidden">
+        {/* Sidebar with fixed width */}
+        <Sidebar className="w-64 h-full bg-gray-200" />
+        {/* Main content with flexible width */}
+        <div className="flex-1 overflow-y-auto p-4">
+          <h1 className="font-bold text-2xl text-slate-700 mb-5">
+            Generate barcodes
+          </h1>
 
-      <div className="flex w-full">
-      <Sidebar></Sidebar>
-        <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-          <h1 style={{ color: "#000", fontWeight: "bold" }}>Generate barcodes</h1>
-          <p style={{ fontStyle: "italic", color: "#555" }}>
-            Generate clean and professional barcodes ready for printing.
-          </p>
+          <div className="mb-6 p-4 border border-gray-300 rounded-lg shadow-sm">
+            <div className="flex flex-wrap gap-4">
+              <label>
+                <strong>Item Name:</strong>
+                <input
+                  type="text"
+                  value={itemName}
+                  onChange={(e) => setItemName(e.target.value)}
+                  placeholder="Enter item name"
+                  className="border rounded-md px-2 py-1 ml-2"
+                />
+              </label>
 
-          <div
-            style={{
-              marginBottom: "20px",
-              padding: "10px",
-              border: "1px solid #ddd",
-              borderRadius: "8px",
-            }}
-          >
-            <label>
-              <strong>Item Name:</strong>
-              <input
-                type="text"
-                value={itemName}
-                onChange={(e) => setItemName(e.target.value)}
-                placeholder="Enter item name"
-                style={{ marginLeft: "10px", padding: "5px" }}
-              />
-            </label>
-            <label style={{ marginLeft: "20px" }}>
-              <strong>No. of Labels:</strong>
-              <input
-                type="number"
-                value={numLabels}
-                onChange={(e) => setNumLabels(e.target.value)}
-                placeholder="Enter number of labels"
-                style={{ marginLeft: "10px", padding: "5px" }}
-              />
-            </label>
-            <label style={{ marginLeft: "20px" }}>
-              <strong>Barcode Width (mm):</strong>
-              <input
-                type="number"
-                value={barcodeWidth}
-                onChange={(e) => setBarcodeWidth(Number(e.target.value))}
-                placeholder="Width"
-                style={{ marginLeft: "10px", padding: "5px" }}
-              />
-            </label>
-            <label style={{ marginLeft: "20px" }}>
-              <strong>Barcode Height (mm):</strong>
-              <input
-                type="number"
-                value={barcodeHeight}
-                onChange={(e) => setBarcodeHeight(Number(e.target.value))}
-                placeholder="Height"
-                style={{ marginLeft: "10px", padding: "5px" }}
-              />
-            </label>
-            <label style={{ marginLeft: "20px" }}>
-              <strong>Printer Type:</strong>
-              <select
-                value={printerType}
-                onChange={(e) => setPrinterType(e.target.value)}
-                style={{ marginLeft: "10px", padding: "5px" }}
-              >
-                <option value="A4">A4 Printer</option>
-                <option value="SingleCell">Single-Cell Printer</option>
-              </select>
-            </label>
+              <label>
+                <strong>No. of Labels:</strong>
+                <input
+                  type="number"
+                  value={numLabels}
+                  onChange={(e) => setNumLabels(e.target.value)}
+                  placeholder="Enter number of labels"
+                  className="border rounded-md px-2 py-1 ml-2"
+                />
+              </label>
+
+              <label>
+                <strong>Barcode Width (mm):</strong>
+                <input
+                  type="number"
+                  value={barcodeWidth}
+                  onChange={(e) => setBarcodeWidth(Number(e.target.value))}
+                  className="border rounded-md px-2 py-1 ml-2"
+                />
+              </label>
+
+              <label>
+                <strong>Barcode Height (mm):</strong>
+                <input
+                  type="number"
+                  value={barcodeHeight}
+                  onChange={(e) => setBarcodeHeight(Number(e.target.value))}
+                  className="border rounded-md px-2 py-1 ml-2"
+                />
+              </label>
+
+              <label>
+                <strong>Printer Type:</strong>
+                <select
+                  value={printerType}
+                  onChange={(e) => setPrinterType(e.target.value)}
+                  className="border rounded-md px-2 py-1 ml-2"
+                >
+                  <option value="A4">A4 Printer</option>
+                  <option value="SingleCell">Single-Cell Printer</option>
+                </select>
+              </label>
+            </div>
+
             <button
               onClick={generateRandomBarcode}
-              style={{
-                marginLeft: "20px",
-                backgroundColor: "#000",
-                color: "#fff",
-                padding: "10px 20px",
-                border: "none",
-                borderRadius: "5px",
-              }}
+              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
             >
-              Generate Barcodes
+              Generate
             </button>
           </div>
 
-          <div style={{ marginBottom: "20px" }}>
-            <button
-              onClick={handleDownloadPDF}
-              style={{
-                backgroundColor: "#000",
-                color: "#fff",
-                padding: "10px 20px",
-                border: "none",
-                borderRadius: "5px",
-              }}
-            >
-              Download PDF
-            </button>
-          </div>
-
-          <table
-            border={1}
-            style={{
-              width: "100%",
-              marginBottom: "20px",
-              borderCollapse: "collapse",
-              textAlign: "left",
-            }}
+          <div
+            onClick={handleDownloadPDF}
+            className="mb-6 w-40 cursor-pointer p-3 text-center font-bold bg-green-900 text-white  rounded-md hover:bg-green-700 "
           >
-            <thead>
-              <tr style={{ backgroundColor: "#f5f5f5", color: "#000" }}>
-                <th style={{ padding: "10px" }}>Item Name</th>
-                <th style={{ padding: "10px" }}>Barcode</th>
-              </tr>
-            </thead>
-            <tbody>
-              {visibleBarcodes.map((item, index) => (
-                <tr key={index}>
-                  <td style={{ padding: "10px" }}>{item.itemName}</td>
-                  <td style={{ padding: "10px" }}>{item.barcode}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            Download PDF
+          </div>
 
-          {visibleBarcodes.length < barcodes.length && (
-            <button
-              onClick={loadMoreBarcodes}
-              style={{
-                backgroundColor: "#000",
-                color: "#fff",
-                padding: "10px 20px",
-                border: "none",
-                borderRadius: "5px",
-              }}
-            >
-              Load More
-            </button>
-          )}
+          <div className="overflow-y-auto max-h-[450px] border border-gray-300 rounded-lg">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="p-2">Item Name</th>
+                  <th className="p-2">Barcode</th>
+                </tr>
+              </thead>
+              <tbody>
+                {visibleBarcodes.map((item, index) => (
+                  <tr key={index} className="odd:bg-gray-50 even:bg-white">
+                    <td className="p-2">{item.itemName}</td>
+                    <td className="p-2">{item.barcode}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

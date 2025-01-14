@@ -1,34 +1,104 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaTachometerAlt, FaUsers, FaBoxes, FaBook, FaBarcode, FaChartBar, FaExchangeAlt, FaCog, FaBars } from "react-icons/fa";
+
 const Sidebar = () => {
+  const [isOpen, setIsOpen] = useState(true); // State to toggle sidebar
+
   return (
-    <div className="h-[50rem] w-52 bg-slate-600 rounded-md">
-      <div className="flex flex-col items-center text-slate-300 justify-center pt-5 space-y-4 select-none">
-        <div className="h-10 w-full text-slate-300 flex justify-center items-center border-b-2 border-transparent hover:border-blue-500 hover:bg-blue-700 hover:text-white transition-all duration-300">
-          <Link to="/dashboard">Dashboard</Link>
-        </div>
-        <div className="h-10 w-full text-slate-300 flex justify-center items-center  border-transparent hover:border-blue-500 hover:bg-blue-700 hover:text-white transition-all duration-300 border-b-[1px]">
-          <Link to="/customers">Customers</Link>
-        </div>
-        <div className="h-10 w-full text-slate-300 flex justify-center items-center border-b-2 border-transparent hover:border-blue-500 hover:bg-blue-700 hover:text-white transition-all duration-300">
-          <Link to="/inventory">Inventory</Link>
-        </div>
-        <div className="h-10 w-full text-slate-300 flex justify-center items-center border-b-2 border-transparent hover:border-blue-500 hover:bg-blue-700 hover:text-white transition-all duration-300">
-          <Link to="/ledgers">Ledger</Link>
-        </div>
-        <div className="h-10 w-full text-slate-300 flex justify-center items-center border-b-2 border-transparent hover:border-blue-500 hover:bg-blue-700 hover:text-white transition-all duration-300">
-          <Link to="/barcode">Barcode</Link>
-        </div>
-        <div className="h-10 w-full text-slate-300 flex justify-center items-center border-b-2 border-transparent hover:border-blue-500 hover:bg-blue-700 hover:text-white transition-all duration-300">
-          <Link to="/reports">Reports</Link>
-        </div>
-        <div className="h-10 w-full text-slate-300 flex justify-center items-center border-b-2 border-transparent hover:border-blue-500 hover:bg-blue-700 hover:text-white transition-all duration-300">
-          <Link to="/transactions">Transactions</Link>
-        </div>
-        <div className="h-10 w-full text-slate-300 flex justify-center items-center border-b-2 border-transparent hover:border-blue-500 hover:bg-blue-700 hover:text-white transition-all duration-300">
-          <Link to="/settings">Settings</Link>
+    <div className="flex">
+      {/* Sidebar */}
+      <div
+        className={`bg-slate-600 h-screen transition-all duration-300 ${
+          isOpen ? "w-64" : "w-16"
+        }`}
+      >
+        <div className="flex flex-col h-full text-white">
+          {/* Hamburger Menu */}
+          <div
+            className="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-700"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <span className="text-lg">
+              <FaBars />
+            </span>
+            <span className={`${isOpen ? "block" : "hidden"} ml-4 font-bold`}>
+              Menu
+            </span>
+          </div>
+
+          {/* Links */}
+          <div className="flex flex-col space-y-4 mt-6">
+            <SidebarLink
+              to="/dashboard"
+              icon={<FaTachometerAlt />}
+              label="Dashboard"
+              isOpen={isOpen}
+            />
+            <SidebarLink
+              to="/customers"
+              icon={<FaUsers />}
+              label="Customers"
+              isOpen={isOpen}
+            />
+            <SidebarLink
+              to="/inventory"
+              icon={<FaBoxes />}
+              label="Inventory"
+              isOpen={isOpen}
+            />
+            <SidebarLink
+              to="/ledgers"
+              icon={<FaBook />}
+              label="Ledger"
+              isOpen={isOpen}
+            />
+            <SidebarLink
+              to="/barcode"
+              icon={<FaBarcode />}
+              label="Barcode"
+              isOpen={isOpen}
+            />
+            <SidebarLink
+              to="/reports"
+              icon={<FaChartBar />}
+              label="Reports"
+              isOpen={isOpen}
+            />
+            <SidebarLink
+              to="/transactions"
+              icon={<FaExchangeAlt />}
+              label="Transactions"
+              isOpen={isOpen}
+            />
+            <SidebarLink
+              to="/settings"
+              icon={<FaCog />}
+              label="Settings"
+              isOpen={isOpen}
+            />
+          </div>
         </div>
       </div>
+{/* 
+      Main Content
+      <div className="flex-grow bg-gray-100 p-4">
+        <h1 className="text-2xl font-bold">Main Content Here</h1>
+      </div> */}
     </div>
+  );
+};
+
+// Sidebar Link Component
+const SidebarLink = ({ to, icon, label, isOpen }) => {
+  return (
+    <Link
+      to={to}
+      className="flex items-center space-x-4 text-slate-300 hover:text-white hover:bg-slate-700 transition-all duration-300 p-3 rounded-md mx-2"
+    >
+      <span className="text-lg">{icon}</span>
+      <span className={`${isOpen ? "block" : "hidden"} text-sm`}>{label}</span>
+    </Link>
   );
 };
 

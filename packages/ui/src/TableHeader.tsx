@@ -16,7 +16,7 @@ function TableHeader({
   customer,
 }: TableHeaderProps) {
   return (
-    <div className="grid grid-cols-6 bg-blue-800 text-white font-semibold rounded-t-lg">
+    <div className="grid grid-cols-6 bg-slate-600 text-white font-semibold rounded-t-lg">
       <div className="px-4 py-2">{date}</div>
       <div className="px-4 py-2">{description}</div>
       <div className="px-4 py-2">{category}</div>
@@ -32,7 +32,7 @@ function TableHeader({
 // }
 export function CustomerTableHeader({}: any) {
   return (
-    <div className="grid grid-cols-6 bg-blue-800 text-white font-semibold rounded-t-lg">
+    <div className="grid grid-cols-6 bg-slate-600 text-white font-semibold rounded-t-lg">
       <div className="px-4 py-2">Name</div>
       <div className="px-4 py-2">Email</div>
       <div className="px-4 py-2">Phone</div>
