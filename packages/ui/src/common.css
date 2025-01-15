@@ -1,0 +1,9 @@
+.fixed-size {
+  width: 128px; /* Fixed width */
+  height: 128px; /* Fixed height */
+  transition: none; /* Disable transitions */
+}
+
+.fixed-size:hover {
+  transform: none; /* Disable transform on hover */
+}

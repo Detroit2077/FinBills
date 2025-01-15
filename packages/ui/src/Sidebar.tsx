@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaTachometerAlt, FaUsers, FaBoxes, FaBook, FaBarcode, FaChartBar, FaExchangeAlt, FaCog, FaBars } from "react-icons/fa";
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(true); // State to toggle sidebar
+  const [isOpen, setIsOpen] = useState(true); 
 
   return (
     <div className="flex">
@@ -16,13 +16,13 @@ const Sidebar = () => {
         <div className="flex flex-col h-full text-white">
           {/* Hamburger Menu */}
           <div
-            className="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-700"
+            className="flex items-center gap-20 p-4 cursor-pointer hover:bg-slate-700"
             onClick={() => setIsOpen(!isOpen)}
           >
             <span className="text-lg">
               <FaBars />
             </span>
-            <span className={`${isOpen ? "block" : "hidden"} ml-4 font-bold`}>
+            <span className={`${isOpen ? "block" : "hidden"} font-bold`}>
               Menu
             </span>
           </div>
@@ -90,7 +90,7 @@ const Sidebar = () => {
 };
 
 // Sidebar Link Component
-const SidebarLink = ({ to, icon, label, isOpen }) => {
+const SidebarLink = ({ to, icon, label, isOpen } ) => {
   return (
     <Link
       to={to}

@@ -37,6 +37,7 @@
     "html2canvas": "^1.4.1",
     "jsbarcode": "^3.11.6",
     "jspdf": "^2.5.2",
+    "react-phone-number-input": "^3.4.11",
     "react-router-dom": "^7.1.1",
     "react-slick": "^0.30.3"
   }

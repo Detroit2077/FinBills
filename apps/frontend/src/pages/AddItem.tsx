@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {Appbar, Sidebar, MainCard} from "@repo/ui/index";
+import { FaArrowLeft } from "react-icons/fa";
+
 
 const AddItem = () => {
   const [productDetails, setProductDetails] = useState({
@@ -18,6 +22,8 @@ const AddItem = () => {
     img_url: "",
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setProductDetails({ ...productDetails, [name]: value });
@@ -34,10 +40,13 @@ const AddItem = () => {
   };
 
   return (
-    <div className="w-screen h-full ">
-      <div className="max-w-screen-xl  bg-white px-6 rounded-lg  mx-36">
+    <div className="w-screen h-screen pt-16 overflow-x-hidden">
+      <div className="max-w-screen-xl  bg-white px-6 rounded-lg  mx-36 shadow-2xl overflow-hidden">
         <div className="flex justify-between items-center m-6">
-          <div className="font-bold text-lg">Add Product</div>
+        <FaArrowLeft size={30} color="grey" onClick={()=>{navigate(-1)}} />
+          <div className="font-bold text-2xl text-slate-500">Add Product</div>
+
+
           <button className="text-white w-32 text-sm font-bold bg-blue-600 rounded-md px-4 py-2">
             Save
           </button>

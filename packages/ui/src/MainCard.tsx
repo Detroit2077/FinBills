@@ -117,13 +117,11 @@ interface Data {
 
 function AddCustomerButton() {
   return (
-    <div>
-      <button className="bg-blue-600 flex items-center gap-3 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded ">
+      <div className="bg-cyan-900 flex items-center gap-3 text-white font-bold py-1 px-3 rounded ">
         {" "}
-        <LuPlus size={30} />
+        <LuPlus size={20} />
         Add costumer
-      </button>
-    </div>
+      </div>
   );
 }
 
