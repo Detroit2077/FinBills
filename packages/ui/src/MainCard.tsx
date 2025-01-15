@@ -46,7 +46,7 @@ const MainCard = ({ title }: Data) => {
   ];
   return (
     <div className="bg-slate-200 w-full rounded-md border border-t-slate-300 shadow-md flex flex-col">
-      <div className="h-16 bg-slate-100 rounded-md flex justify-between items-center ">
+      <div className="h-14 bg-slate-100 rounded-md flex justify-between items-center ">
         <div className="font-bold text-lg ml-5">
           {/* Navigation */}
           {title}
@@ -84,7 +84,7 @@ const MainCard = ({ title }: Data) => {
           ))}
         </div>
       )}
-      {title === "Customer" && <SearchBar></SearchBar>}
+      {/* {title === "Customer" && <SearchBar />} */}
       {title === "Dashboard" && (
         <div className="flex h-24 bg-slate-100 ">
           {DashboardData.map((data) => (
