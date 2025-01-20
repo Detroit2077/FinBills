@@ -1,5 +1,5 @@
 import Avatar from "../assets/Avatar.png";
-const card = () => {
+const Card = () => {
   return (
     <div className="w-[304px] h-[230px] p-[15px] gap-[20px] flex flex-col items-center">
       <img src={Avatar} alt="" className="w-[50px] h-[50px]" />
@@ -16,4 +16,4 @@ const card = () => {
   );
 };
 
-export default card;
+export default Card;
